@@ -5,10 +5,10 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Presensi;
-use Auth;
 use Carbon\Carbon;
 use DB;
 use stdClass;
+use Illuminate\Support\Facades\Auth;
 date_default_timezone_set("Asia/Jakarta");
 
 class PresensiController extends Controller
@@ -29,7 +29,7 @@ class PresensiController extends Controller
             $datetime->settings(['formatFunction' => 'translatedFormat']);
             $masuk->settings(['formatFunction' => 'translatedFormat']);
             $pulang->settings(['formatFunction' => 'translatedFormat']);
-            
+
             $item->tanggal = $datetime->format('l, j F Y');
             $item->masuk = $masuk->format('H:i');
             $item->pulang = $pulang->format('H:i');
@@ -40,10 +40,10 @@ class PresensiController extends Controller
             'data' => $presensis,
             'message' => 'Sukses menampilkan data'
         ]);
-        
-    
+
+
     }
-    function savePresensi(Request $request) 
+    function savePresensi(Request $request)
     {
         $keterangan = "";
         $presensi = Presensi::whereDate('tanggal', '=', date('Y-m-d'))
@@ -67,11 +67,21 @@ class PresensiController extends Controller
         }
         $presensi = Presensi::whereDate('tanggal', '=', date('Y-m-d'))
                  ->first();
-       
+
         return response()->json([
             'success' => true,
             'data' => $presensi,
             'message' => 'Sukses simpan'
+        ]);
+    }
+
+    public function getTampil() {
+        $tidak = "EMBT elia masih belum tau";
+
+        return response()->json([
+            'success' => true,
+            'data' => $tidak,
+            'message' => 'Sukses ditampilkan'
         ]);
     }
 }

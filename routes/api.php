@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\PresensiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +34,5 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/get-presensi',  [App\Http\Controllers\API\PresensiController::class, 'getPresensis']);
 
     Route::post('save-presensi', [App\Http\Controllers\API\PresensiController::class, 'savePresensi']);
+    Route::get('/get-tampil', [PresensiController::class, 'getTampil']);
 });
